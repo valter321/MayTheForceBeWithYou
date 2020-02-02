@@ -12,7 +12,9 @@ object RetrofitService {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private var client : OkHttpClient = OkHttpClient.Builder().addInterceptor(logging).build()
+    private var client : OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
 
     private var retrofit : Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)

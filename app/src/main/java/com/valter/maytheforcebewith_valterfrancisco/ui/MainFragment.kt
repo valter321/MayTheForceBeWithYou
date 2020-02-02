@@ -1,18 +1,15 @@
-package com.valter.maytheforcebewith_valterfrancisco.ui.main
+package com.valter.maytheforcebewith_valterfrancisco.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.valter.maytheforcebewith_valterfrancisco.R
-import com.valter.maytheforcebewith_valterfrancisco.data.network.RetrofitService
-import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import org.koin.core.parameter.parametersOf
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
@@ -20,7 +17,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel { parametersOf(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -29,15 +26,11 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
 
-        val api = RetrofitService.createService(SwapiService::class.java)
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val response = api.getAllPersons()
-            message.text = response.toString()
-        }
+        viewModel.people.observe(viewLifecycleOwner, Observer {
+            message.text = it.toString()
+        })
     }
 
 }

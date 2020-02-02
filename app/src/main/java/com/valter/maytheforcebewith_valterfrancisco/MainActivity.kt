@@ -2,7 +2,7 @@ package com.valter.maytheforcebewith_valterfrancisco
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.valter.maytheforcebewith_valterfrancisco.ui.main.MainFragment
+import com.valter.maytheforcebewith_valterfrancisco.ui.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
