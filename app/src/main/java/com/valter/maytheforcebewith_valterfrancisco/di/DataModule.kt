@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.squareup.moshi.Moshi
 import com.valter.maytheforcebewith_valterfrancisco.BuildConfig
 import com.valter.maytheforcebewith_valterfrancisco.data.db.SwapiDatabase
+import com.valter.maytheforcebewith_valterfrancisco.data.network.ConnectivityInterceptor
+import com.valter.maytheforcebewith_valterfrancisco.data.network.ConnectivityInterceptorImpl
 import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepositoryImpl
@@ -20,12 +22,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object DataModule {
     val module = module {
         single { provideMoshi() }
-        single { provideDefaultOkHttpClient() }
+        single { provideLoggingInterceptor() }
+        single<ConnectivityInterceptor> { provideConnectivityInterceptor(get()) }
+        single { provideDefaultOkHttpClient(get(), get()) }
         single { provideRetrofit(get(), get()) }
         single { provideDatabase(androidApplication()) }
         single { providePersonDao(get()) }
         single { provideSwapiService(get()) }
-        single<SwapiRepository> { SwapiRepositoryImpl(get(), get()) }
+        single<SwapiRepository> { SwapiRepositoryImpl(get(), get(), get()) }
         viewModel { MainViewModel(get()) }
     }
 }
@@ -36,8 +40,13 @@ fun provideLoggingInterceptor() = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
 
-fun provideDefaultOkHttpClient() = OkHttpClient.Builder()
-        .addInterceptor(provideLoggingInterceptor())
+fun provideConnectivityInterceptor(context: Context) = ConnectivityInterceptorImpl(context)
+
+fun provideDefaultOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
+                               connectivityInterceptor: ConnectivityInterceptor
+) = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(connectivityInterceptor)
         .build()
 
 fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit = Retrofit.Builder()

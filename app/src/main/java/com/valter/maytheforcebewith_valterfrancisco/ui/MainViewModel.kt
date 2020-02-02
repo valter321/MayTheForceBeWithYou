@@ -4,13 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PageKeyedDataSource
-import androidx.paging.toLiveData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
-import kotlinx.coroutines.launch
+import com.valter.maytheforcebewith_valterfrancisco.utils.launchSafely
 
 private const val FIRST_PAGE = "1"
 
@@ -24,14 +22,12 @@ class MainViewModel(
 
     private var _peopleData = MutableLiveData<Outcome<PeopleData>>()
 //    internal var people = forceDataSourceFactory.toLiveData(1)
-    private var _people = MutableLiveData<List<Person>>()
-    internal var people: LiveData<List<Person>> = _people
+    private var _people = MutableLiveData<Outcome<List<Person>>>()
+    internal var people: LiveData<Outcome<List<Person>>> = _people
 
     init {
-        viewModelScope.launch {
-            repository.getPeople().also {
-                _people.value = it
-            }
+        viewModelScope.launchSafely(_people) {
+            repository.getPeople()
         }
     }
 

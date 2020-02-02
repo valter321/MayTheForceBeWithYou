@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.valter.maytheforcebewith_valterfrancisco.R
+import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
 import kotlinx.android.synthetic.main.main_fragment.*
 import org.koin.core.parameter.parametersOf
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -26,10 +27,12 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
 
-        viewModel.people.observe(viewLifecycleOwner, Observer {
-            message.text = it.toString()
+        viewModel.people.observe(viewLifecycleOwner, Observer { outcome ->
+            when (outcome) {
+                is Outcome.Success -> message.text = outcome.data.toString()
+            }
+
         })
     }
 
