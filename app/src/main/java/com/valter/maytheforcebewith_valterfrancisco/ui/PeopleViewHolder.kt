@@ -23,7 +23,7 @@ class PeopleViewHolder(
             imgFavorite.setFavorite(isFavorite)
             imgIcon.setColorFilter(getRandomMaterialColor(containerView.context, TYPE_COLOR))
             txtName.text = name
-            txtDescription.text = "Date of Birth: $birthYear"
+            txtDescription.text = containerView.context.getString(R.string.date_of_birth, birthYear)
             txtIconName.text = name.getInitials()
             fmrContent.setSingleClickListener { personListener.invoke(this) }
             imgFavorite.setSingleClickListener {

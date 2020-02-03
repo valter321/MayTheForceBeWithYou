@@ -6,25 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:paddingStart="25dp"
-    android:paddingTop="12dp"
-    android:paddingEnd="25dp"
-    android:paddingBottom="12dp">
+    android:paddingStart="@dimen/horizontal_padding"
+    android:paddingTop="@dimen/vertical_padding"
+    android:paddingEnd="@dimen/horizontal_padding"
+    android:paddingBottom="@dimen/vertical_padding">
 
     <FrameLayout
         android:id="@+id/frmIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/icon_image_size"
+        android:layout_height="@dimen/icon_image_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/bg_circle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/txtIconName"
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="14dp"
+            android:textSize="@dimen/icon_text_size"
             tools:text="LS" />
 
     </FrameLayout>
@@ -41,8 +42,8 @@
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/recycler_view_start_margin"
+        android:layout_marginTop="@dimen/small_start_margin"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/frmIcon"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,10 +53,10 @@
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="@dimen/recycler_view_start_margin"
+        android:layout_marginBottom="@dimen/small_start_margin"
         android:lines="1"
-        android:textSize="13dp"
+        android:textSize="@dimen/description_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/frmIcon"
         tools:text="Date of Birth: 9999BBY" />
@@ -66,6 +67,7 @@
         android:id="@+id/imgFavorite"
         android:src="@drawable/ic_star_border_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
