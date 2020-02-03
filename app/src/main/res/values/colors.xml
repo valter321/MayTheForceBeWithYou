@@ -6,4 +6,5 @@
     <color name="bg_circle_default">#666666</color>
     <color name="white">#FFFFFF</color>
     <color name="dividerColor">#DCDCDC</color>
+    <color name="lightGrey">#a0a0a0</color>
 </resources>

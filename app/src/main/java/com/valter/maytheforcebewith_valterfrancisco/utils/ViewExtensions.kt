@@ -3,6 +3,7 @@ package com.valter.maytheforcebewith_valterfrancisco.utils
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import com.valter.maytheforcebewith_valterfrancisco.R
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.SINGLE_LONG_CLICK_INTERVAL
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.SingleClickListener
 

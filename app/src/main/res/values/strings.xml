@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MayTheForceBeWith_valterFrancisco</string>
+    <string name="details_name">Name: </string>
+    <string name="details_height">Height: </string>
+    <string name="details_mass">Weight: </string>
+    <string name="details_hair_color">Hair Color: </string>
+    <string name="details_skin_color">Skin Color: </string>
+    <string name="details_eye_color">Eye Color: </string>
+    <string name="details_birth_year">Birth Year: </string>
+    <string name="details_gender">Gender: </string>
 </resources>

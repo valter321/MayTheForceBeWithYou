@@ -11,20 +11,19 @@ import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.BaseFragment
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
-import kotlinx.android.synthetic.main.main_fragment.*
-import org.koin.core.parameter.parametersOf
+import kotlinx.android.synthetic.main.fragment_people_list.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class MainFragment : BaseFragment() {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+class PeopleListFragment : BaseFragment() {
 
     override val layout: Int
-        get() = R.layout.main_fragment
+        get() = R.layout.fragment_people_list
 
     private val viewModel: MainViewModel by viewModel { parametersOf(this) }
+
+    private val navigation: PersonListNavigation by inject { parametersOf(this) }
 
     private val baseAdapter: PeopleAdapter by lazy { PeopleAdapter(::onEditorialClicked) }
 
@@ -66,8 +65,8 @@ class MainFragment : BaseFragment() {
         return insets
     }
 
-    private fun onEditorialClicked(name: String) {
-//        navigation.openEditorial(story.type, story.id)
+    private fun onEditorialClicked(person: Person) {
+        navigation.openPersonDetails(person)
     }
 
 }

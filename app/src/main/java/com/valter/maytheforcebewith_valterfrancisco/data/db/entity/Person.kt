@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @Entity(tableName = "person")
 @JsonClass(generateAdapter = true)
@@ -28,7 +29,7 @@ data class Person(
     val starships: List<String>?,
     val url: String,
     val vehicles: List<String>?
-) {
+) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id = 0
 }
