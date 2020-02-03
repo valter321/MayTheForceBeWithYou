@@ -1,4 +1,4 @@
-package com.valter.maytheforcebewith_valterfrancisco.ui
+package com.valter.maytheforcebewith_valterfrancisco.ui.components
 
 import androidx.paging.DataSource
 

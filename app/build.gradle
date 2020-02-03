@@ -29,6 +29,10 @@ android {
     buildTypes.each {
         it.buildConfigField "String", "BASE_URL", "\"https://swapi.co/api/\""
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -39,6 +43,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     // Coroutines
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
