@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.toLiveData
+import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ForceResponse
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
@@ -26,6 +27,9 @@ class MainViewModel(
     private var _peopleData = MutableLiveData<Outcome<PeopleData>>()
     internal var peopleData: LiveData<Outcome<PeopleData>> = _peopleData
     internal var people = forceDataSourceFactory.toLiveData(1)
+
+    private var _favoriteResponse = MutableLiveData<Outcome<ForceResponse>>()
+    var favoriteResponse: LiveData<Outcome<ForceResponse>> = _favoriteResponse
 
     /**
      * Proxy to ForceDataSource
@@ -63,6 +67,16 @@ class MainViewModel(
             repository.getPeople(pageToLoad, isFirstPage).also {
                 dataSourceCallbackCaller(it)
             }
+        }
+    }
+
+    fun favoritePerson(person: Person) {
+        viewModelScope.launchSafely(
+                _favoriteResponse,
+                loading = false,
+                context = Dispatchers.IO
+        ) {
+            repository.favoritePerson(person)
         }
     }
 }

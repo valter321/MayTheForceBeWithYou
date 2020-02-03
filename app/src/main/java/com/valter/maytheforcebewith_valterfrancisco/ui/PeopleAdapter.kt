@@ -8,12 +8,14 @@ import com.valter.maytheforcebewith_valterfrancisco.R
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 
 class PeopleAdapter(
-        private val onClickPerson: (person: Person) -> Unit
+        private val onClickPerson: (person: Person) -> Unit,
+        private val onClickFavorite: (person: Person) -> Unit
 ) : PagedListAdapter<Person, PeopleViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PeopleViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_people_list, parent, false),
-            onClickPerson
+            onClickPerson,
+            onClickFavorite
     )
 
     override fun onBindViewHolder(holder: PeopleViewHolder, position: Int) {

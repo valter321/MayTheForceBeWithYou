@@ -4,6 +4,7 @@ import android.content.Context
 import com.valter.maytheforcebewith_valterfrancisco.data.db.PersonDao
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
+import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ForceResponse
 import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
 import com.valter.maytheforcebewith_valterfrancisco.utils.isConnectedToNetwork
 
@@ -45,5 +46,9 @@ class SwapiRepositoryImpl(
 
     override suspend fun persistData(people: List<Person>) {
         peopleDao.insert(people)
+    }
+
+    override suspend fun favoritePerson(person: Person) : ForceResponse {
+        return swapiService.sendFavoritePerson(person)
     }
 }

@@ -28,7 +28,8 @@ data class Person(
     val species: List<String>?,
     val starships: List<String>?,
     val url: String,
-    val vehicles: List<String>?
+    val vehicles: List<String>?,
+    var isFavorite: Boolean = false
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id = 0

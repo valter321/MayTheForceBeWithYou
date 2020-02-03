@@ -4,6 +4,7 @@ import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.valter.maytheforcebewith_valterfrancisco.R
@@ -25,7 +26,7 @@ class PeopleListFragment : BaseFragment() {
 
     private val navigation: PersonListNavigation by inject { parametersOf(this) }
 
-    private val baseAdapter: PeopleAdapter by lazy { PeopleAdapter(::onEditorialClicked) }
+    private val baseAdapter: PeopleAdapter by lazy { PeopleAdapter(::onEditorialClicked, ::onFavoriteClick) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,6 +55,19 @@ class PeopleListFragment : BaseFragment() {
                 is Outcome.Success -> setData(outcome.data)
             }
         })
+
+        viewModel.favoriteResponse.observe(viewLifecycleOwner, Observer { outcome ->
+            when (outcome) {
+                is Outcome.Success -> {
+                    showContent()
+                    Toast.makeText(
+                            context,
+                            "Favorite Person added",
+                            Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -67,6 +81,10 @@ class PeopleListFragment : BaseFragment() {
 
     private fun onEditorialClicked(person: Person) {
         navigation.openPersonDetails(person)
+    }
+
+    private fun onFavoriteClick(person: Person) {
+        viewModel.favoritePerson(person)
     }
 
 }

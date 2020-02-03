@@ -2,9 +2,9 @@ package com.valter.maytheforcebewith_valterfrancisco.data.network
 
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.*
 import com.valter.maytheforcebewith_valterfrancisco.data.network.response.SwapiResponse
-import retrofit2.http.GET
-import retrofit2.http.Query
-import retrofit2.http.Url
+import retrofit2.http.*
+
+const val WEB_HOOK_ID = "fcb153e0-804e-4896-b8cc-cb51b2ec4ce7"
 
 interface SwapiService {
 
@@ -16,18 +16,6 @@ interface SwapiService {
     @GET
     suspend fun getNextPeople(@Url url: String) : SwapiResponse<Person>
 
-    @GET("planets")
-    suspend fun getPlanets() : SwapiResponse<Planet>
-
-    @GET("films")
-    suspend fun getFilms() : SwapiResponse<Film>
-
-    @GET("species")
-    suspend fun getSpecies() : SwapiResponse<Species>
-
-    @GET("vehicles")
-    suspend fun getVehicles() : SwapiResponse<Vehicle>
-
-    @GET("starships")
-    suspend fun getStarships() : SwapiResponse<Starship>
+    @POST("https://webhook.site/$WEB_HOOK_ID")
+    suspend fun sendFavoritePerson(@Body person: Person) : ForceResponse
 }
