@@ -40,6 +40,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -82,7 +86,6 @@ dependencies {
     testImplementation "io.mockk:mockk:$mockkVersion"
     testImplementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     testImplementation "org.koin:koin-test:$koinVersion"
-    testImplementation "io.mockk:mockk:$mockkVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinCoroutinesVersion"
 
     androidTestImplementation "androidx.test:runner:$test_runner"
