@@ -2,9 +2,9 @@ package com.valter.maytheforcebewith_valterfrancisco.data.repository
 
 import android.content.Context
 import com.valter.maytheforcebewith_valterfrancisco.data.db.PersonDao
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ForceResponse
+import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
 import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
 import com.valter.maytheforcebewith_valterfrancisco.utils.isConnectedToNetwork
 

@@ -8,8 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.valter.maytheforcebewith_valterfrancisco.R
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ErrorData
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.ErrorData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.BaseFragment
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome

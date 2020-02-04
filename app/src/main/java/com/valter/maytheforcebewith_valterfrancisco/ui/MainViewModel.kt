@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.toLiveData
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ForceResponse
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
+import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.ForceDataSource

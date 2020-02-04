@@ -1,4 +1,4 @@
-package com.valter.maytheforcebewith_valterfrancisco.data.db.entity
+package com.valter.maytheforcebewith_valterfrancisco.data.model
 
 import androidx.annotation.StringRes
 

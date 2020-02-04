@@ -1,7 +1,7 @@
 package com.valter.maytheforcebewith_valterfrancisco.data.repository
 
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ForceResponse
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
+import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 
 interface SwapiRepository {

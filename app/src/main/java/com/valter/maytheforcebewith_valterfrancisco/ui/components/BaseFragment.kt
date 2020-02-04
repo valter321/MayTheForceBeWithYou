@@ -10,7 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.valter.maytheforcebewith_valterfrancisco.R
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ErrorData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.ErrorData
 import com.valter.maytheforcebewith_valterfrancisco.utils.hide
 import com.valter.maytheforcebewith_valterfrancisco.utils.show
 import kotlinx.android.synthetic.main.fragment_base.*

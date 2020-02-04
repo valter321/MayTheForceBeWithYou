@@ -6,7 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.valter.maytheforcebewith_valterfrancisco.R
-import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ErrorData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.ErrorData
 import kotlinx.android.synthetic.main.widget_error.view.*
 
 class ErrorLayout @JvmOverloads constructor(
