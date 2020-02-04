@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.valter.maytheforcebewith_valterfrancisco.R
+import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ErrorData
 import com.valter.maytheforcebewith_valterfrancisco.utils.hide
 import com.valter.maytheforcebewith_valterfrancisco.utils.show
 import kotlinx.android.synthetic.main.fragment_base.*
@@ -20,8 +21,8 @@ import kotlinx.android.synthetic.main.fragment_base_loading.*
 /**
  * BaseFragment
  *
- * This fragment handles the logic to show/hide the content, loading and error views.
- * ViewStubs are used for the loading and error views to reduce memory usage and speed
+ * This fragment handles the logic to show/hide the content, loading and widget_error views.
+ * ViewStubs are used for the loading and widget_error views to reduce memory usage and speed
  * up rendering by loading the views only when they are needed.
  */
 abstract class BaseFragment : Fragment(), View.OnApplyWindowInsetsListener {
@@ -52,15 +53,6 @@ abstract class BaseFragment : Fragment(), View.OnApplyWindowInsetsListener {
     }
 
     /**
-     * Sets margin in the left and in the right of the ViewStubs.
-     *
-     * @param margin the margin to be applied.
-     */
-    protected fun setHorizontalMargin(margin: Int) {
-        this.horizontalMargin = margin
-    }
-
-    /**
      * Shows the content view.
      */
     protected fun showContent() {
@@ -81,21 +73,19 @@ abstract class BaseFragment : Fragment(), View.OnApplyWindowInsetsListener {
     }
 
     /**
-     * Shows the error view.
+     * Shows the widget_error view.
      *
-     * @param throwable the error to be showed.
+     * @param error the error text to be shown.
      * @param listener a callback to be invoked when the retry button is clicked.
      */
-    protected fun showError(throwable: Throwable, listener: (() -> Unit)? = null) {
-        throwable.printStackTrace()
+    protected fun showError(error: ErrorData, listener: (() -> Unit)? = null) {
         frmContent.hide()
         hideLoading()
 
         vwsError?.let { inflateLayout(it, R.layout.fragment_base_error) }
             ?: frmError?.show()
 
-        // Searches for the the [Throwable] in the ErrorStates.
-//        frmError.setError(errorResolver.find(throwable), listener)
+        frmError.setError(error, listener)
     }
 
     private fun hideLoading() {

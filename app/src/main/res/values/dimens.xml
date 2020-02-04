@@ -4,6 +4,7 @@
 
     <dimen name="icon_text_size">14sp</dimen>
     <dimen name="description_text_size">13sp</dimen>
+    <dimen name="big_text_size">16sp</dimen>
 
     <dimen name="full_padding">20dp</dimen>
     <dimen name="horizontal_padding">20dp</dimen>
@@ -13,4 +14,6 @@
     <dimen name="recycler_view_top_margin">30dp</dimen>
     <dimen name="recycler_view_start_margin">10dp</dimen>
     <dimen name="small_start_margin">8dp</dimen>
+    <dimen name="big_top_error_margin">110dp</dimen>
+    <dimen name="medium_top_error_margin">70dp</dimen>
 </resources>

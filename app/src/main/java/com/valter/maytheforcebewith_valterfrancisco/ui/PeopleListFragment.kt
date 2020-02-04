@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.valter.maytheforcebewith_valterfrancisco.R
+import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.ErrorData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.BaseFragment
@@ -38,10 +39,6 @@ class PeopleListFragment : BaseFragment() {
         }
     }
 
-    private fun setData(data: PeopleData) {
-        showContent()
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -52,7 +49,13 @@ class PeopleListFragment : BaseFragment() {
         viewModel.peopleData.observe(viewLifecycleOwner, Observer { outcome ->
             when (outcome) {
                 is Outcome.Progress -> showLoading()
-                is Outcome.Success -> setData(outcome.data)
+                is Outcome.Success -> showContent()
+                is Outcome.Failure -> showError(
+                        ErrorData(R.string.error_message,
+                                R.string.retry
+                        ),
+                        ::onRetryClicked
+                )
             }
         })
 
@@ -85,6 +88,10 @@ class PeopleListFragment : BaseFragment() {
 
     private fun onFavoriteClick(person: Person) {
         viewModel.favoritePerson(person)
+    }
+
+    private fun onRetryClicked() {
+        viewModel.retry()
     }
 
 }

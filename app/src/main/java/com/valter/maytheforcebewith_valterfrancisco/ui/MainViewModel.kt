@@ -79,4 +79,8 @@ class MainViewModel(
             repository.favoritePerson(person)
         }
     }
+
+    fun retry() {
+        people.value?.dataSource?.invalidate()
+    }
 }

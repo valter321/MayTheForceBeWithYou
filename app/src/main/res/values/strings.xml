@@ -9,4 +9,6 @@
     <string name="details_eye_color">Eye Color: </string>
     <string name="details_birth_year">Birth Year: </string>
     <string name="details_gender">Gender: </string>
+    <string name="error_message">Something went wrong</string>
+    <string name="retry">RETRY</string>
 </resources>

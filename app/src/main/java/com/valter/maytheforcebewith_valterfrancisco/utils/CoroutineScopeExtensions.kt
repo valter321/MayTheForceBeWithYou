@@ -10,7 +10,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  * This is a shortcut that wraps the safety call inside a [CoroutineScope]
  * This method automatically place the [block] parameter inside a safe try-catch wrapper and converts the result to the specific [Outcome] type
  * If the [block] manages to be executed successfully, the [mutableLiveData] will post an [Outcome.Success] value
- * If the [block] causes an error, the [mutableLiveData] will post an [Outcome.Failure] value
+ * If the [block] causes an widget_error, the [mutableLiveData] will post an [Outcome.Failure] value
  * Before the [block] is executed and if [loading] is true, the [mutableLiveData] will emit an [Outcome.Progress] value
  * It's important to mention that the [block] function must return the type that [Outcome] wraps and not [Outcome]
  */
@@ -26,7 +26,7 @@ fun <T> CoroutineScope.launchSafely(
 /**
  * This method automatically place the suspend [function] parameter inside a safe try-catch wrapper and converts the result to the specific [Outcome] type
  * If the [function] manages to be executed successfully, the [mutableLiveData] will post an [Outcome.Success] value
- * If the [function] causes an error, the [mutableLiveData] will post an [Outcome.Failure] value
+ * If the [function] causes an widget_error, the [mutableLiveData] will post an [Outcome.Failure] value
  * Before the [function] is executed and if [loading] is true, the [mutableLiveData] will emit an [Outcome.Progress] value
  * It's important to mention that the [function] function must return the type that [Outcome] wraps and not [Outcome]
  */
