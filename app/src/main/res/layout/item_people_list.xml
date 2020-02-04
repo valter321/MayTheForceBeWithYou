@@ -62,9 +62,9 @@
         tools:text="Date of Birth: 9999BBY" />
 
     <ImageView
+        android:id="@+id/imgFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imgFavorite"
         android:src="@drawable/ic_star_border_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

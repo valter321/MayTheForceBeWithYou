@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:paddingBottom="@dimen/small_vertical_padding">
 
     <TextView
         android:id="@+id/txtLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="@dimen/detail_text_size"
         android:textStyle="bold"
         tools:text="Height: " />
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/lightGrey"
-        android:textSize="13dp"
+        android:textSize="@dimen/description_text_size"
         tools:text="Whatever " />
 
 </LinearLayout>

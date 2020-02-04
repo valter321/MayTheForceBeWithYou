@@ -1,12 +1,9 @@
 package com.valter.maytheforcebewith_valterfrancisco.ui
 
-import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.valter.maytheforcebewith_valterfrancisco.R
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.BaseFragment
