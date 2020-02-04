@@ -33,11 +33,17 @@ class PeopleListFragment : BaseFragment() {
 
     private val baseAdapter: PeopleAdapter by lazy { PeopleAdapter(::onEditorialClicked, ::onFavoriteClick) }
 
+    private var previousSearchedWord = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Whenever the Search Edit Text changes a new query is sent to the viewModel
         tieSearch.addTextChangedListener { newQuery ->
-            viewModel.queryChannel.offer(newQuery.toString())
+            if(newQuery.toString() != previousSearchedWord) {
+                viewModel.queryChannel.offer(newQuery.toString())
+                previousSearchedWord = newQuery.toString()
+            }
         }
 
         rclItems.apply {
