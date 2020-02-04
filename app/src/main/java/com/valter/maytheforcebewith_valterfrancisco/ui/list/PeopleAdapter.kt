@@ -1,4 +1,4 @@
-package com.valter.maytheforcebewith_valterfrancisco.ui
+package com.valter.maytheforcebewith_valterfrancisco.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.valter.maytheforcebewith_valterfrancisco.ui
+package com.valter.maytheforcebewith_valterfrancisco.data.model
 
 data class Detail(
         val label: String,

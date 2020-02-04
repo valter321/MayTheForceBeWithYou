@@ -1,10 +1,11 @@
-package com.valter.maytheforcebewith_valterfrancisco.ui
+package com.valter.maytheforcebewith_valterfrancisco.ui.details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.valter.maytheforcebewith_valterfrancisco.R
+import com.valter.maytheforcebewith_valterfrancisco.data.model.Detail
 
 class PersonDetailsAdapter : ListAdapter<Detail, PersonDetailsViewHolder>(DIFF_CALLBACK) {
 

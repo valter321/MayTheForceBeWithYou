@@ -1,8 +1,9 @@
-package com.valter.maytheforcebewith_valterfrancisco.ui
+package com.valter.maytheforcebewith_valterfrancisco.ui.list
 
 import androidx.navigation.NavController
 import com.valter.maytheforcebewith_valterfrancisco.R
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
+import com.valter.maytheforcebewith_valterfrancisco.ui.details.PersonDetailsFragmentArgs
 import com.valter.maytheforcebewith_valterfrancisco.utils.safeNavigate
 
 class PersonListNavigationImpl(

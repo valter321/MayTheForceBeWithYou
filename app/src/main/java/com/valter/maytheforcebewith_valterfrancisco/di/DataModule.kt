@@ -12,9 +12,9 @@ import com.valter.maytheforcebewith_valterfrancisco.data.network.ConnectivityInt
 import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepositoryImpl
-import com.valter.maytheforcebewith_valterfrancisco.ui.MainViewModel
-import com.valter.maytheforcebewith_valterfrancisco.ui.PersonListNavigation
-import com.valter.maytheforcebewith_valterfrancisco.ui.PersonListNavigationImpl
+import com.valter.maytheforcebewith_valterfrancisco.ui.list.MainViewModel
+import com.valter.maytheforcebewith_valterfrancisco.ui.list.PersonListNavigation
+import com.valter.maytheforcebewith_valterfrancisco.ui.list.PersonListNavigationImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
