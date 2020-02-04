@@ -12,7 +12,10 @@
         tools:layout="@layout/fragment_people_list">
         <action
             android:id="@+id/action_peopleListFragment_to_PersonDetailsFragment"
-            app:destination="@id/personDetailsFragment" />
+            app:destination="@id/personDetailsFragment"
+            app:enterAnim="@anim/slide_in_from_bottom"
+            app:exitAnim="@anim/stationary"
+            app:popExitAnim="@anim/slide_out_to_bottom"/>
     </fragment>
 
     <fragment
