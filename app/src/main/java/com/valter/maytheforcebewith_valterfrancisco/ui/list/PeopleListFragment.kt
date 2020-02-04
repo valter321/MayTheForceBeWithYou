@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.valter.maytheforcebewith_valterfrancisco.R
@@ -13,10 +14,14 @@ import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.BaseFragment
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
 import kotlinx.android.synthetic.main.fragment_people_list.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class PeopleListFragment : BaseFragment() {
 
     override val layout: Int
@@ -30,6 +35,11 @@ class PeopleListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        tieSearch.addTextChangedListener { newQuery ->
+            viewModel.queryChannel.offer(newQuery.toString())
+        }
+
         rclItems.apply {
             adapter = baseAdapter
             val divider = DividerItemDecoration(context, HORIZONTAL)

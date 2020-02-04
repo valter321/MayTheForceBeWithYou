@@ -9,9 +9,12 @@ import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 @Dao
 interface PersonDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(people: List<Person>)
 
     @Query("SELECT * FROM person")
-    suspend fun getAllPersons() : List<Person>
+    suspend fun getAllPeople() : List<Person>
+
+    @Query("SELECT * FROM person WHERE name LIKE :name")
+    suspend fun getPerson(name: String) : List<Person>
 }

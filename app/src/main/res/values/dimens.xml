@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="elevation">3dp</dimen>
+
     <dimen name="icon_image_size">50dp</dimen>
 
     <dimen name="detail_text_size">15sp</dimen>
@@ -12,8 +15,11 @@
     <dimen name="vertical_padding">12dp</dimen>
     <dimen name="small_vertical_padding">10dp</dimen>
     <dimen name="person_details_padding">20dp</dimen>
+    <dimen name="bottom_padding">110dp</dimen>
+    <dimen name="top_padding">70dp</dimen>
 
     <dimen name="recycler_view_top_margin">30dp</dimen>
+    <dimen name="recycler_view_small_margin">15dp</dimen>
     <dimen name="recycler_view_start_margin">10dp</dimen>
     <dimen name="small_start_margin">8dp</dimen>
     <dimen name="big_top_error_margin">110dp</dimen>

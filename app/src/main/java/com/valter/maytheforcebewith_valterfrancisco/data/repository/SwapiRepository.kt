@@ -6,7 +6,7 @@ import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 
 interface SwapiRepository {
 
-    suspend fun getPeople(page: String, isFirstPage: Boolean): PeopleData
+    suspend fun getPeople(searchQuery: String? = null, page: String, isFirstPage: Boolean): PeopleData
     suspend fun persistData(people: List<Person>)
     suspend fun favoritePerson(person: Person) : ForceResponse
 }

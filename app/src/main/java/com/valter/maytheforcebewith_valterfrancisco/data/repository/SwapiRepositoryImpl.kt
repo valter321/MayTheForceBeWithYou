@@ -14,27 +14,34 @@ class SwapiRepositoryImpl(
         private val context: Context
 ) : SwapiRepository {
 
-    override suspend fun getPeople(page: String, isFirstPage: Boolean): PeopleData {
+    override suspend fun getPeople(searchQuery: String?, page: String, isFirstPage: Boolean): PeopleData {
 
-        return if(context.applicationContext.isConnectedToNetwork()) {
+        if(context.applicationContext.isConnectedToNetwork()) {
+            if(searchQuery.isNullOrEmpty()) {
+                val peopleData = if (isFirstPage) {
+                    fetchPeople()
+                } else {
+                    fetchNextPeople(page)
+                }
 
-            val peopleData = if(isFirstPage) {
-                fetchPeople()
+                val peopleList = peopleData.results.also {
+                    persistData(it)
+                }
+
+                return PeopleData(
+                        peopleList,
+                        peopleData.next
+                )
             } else {
-                fetchNextPeople(page)
+                val searchList = peopleDao.getPerson("$searchQuery%")
+                return PeopleData(
+                        searchList,
+                        null
+                )
             }
-
-            val peopleList = peopleData.results.also {
-                persistData(it)
-            }
-
-            PeopleData(
-                    peopleList,
-                    peopleData.next
-            )
         } else {
-            PeopleData(
-                    peopleDao.getAllPersons(),
+            return PeopleData(
+                    peopleDao.getAllPeople(),
                     null
             )
         }

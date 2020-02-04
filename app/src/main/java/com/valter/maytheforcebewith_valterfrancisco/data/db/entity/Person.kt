@@ -22,6 +22,7 @@ data class Person(
     val height: String,
     val homeworld: String,
     val mass: String,
+    @PrimaryKey
     val name: String,
     @Json(name = "skin_color")
     val skinColor: String,
@@ -30,7 +31,4 @@ data class Person(
     val url: String,
     val vehicles: List<String>?,
     var isFavorite: Boolean = false
-) : Serializable {
-    @PrimaryKey(autoGenerate = true)
-    var id = 0
-}
+) : Serializable

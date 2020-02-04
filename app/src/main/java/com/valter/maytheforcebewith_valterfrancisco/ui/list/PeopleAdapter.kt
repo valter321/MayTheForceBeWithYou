@@ -27,7 +27,7 @@ class PeopleAdapter(
             override fun areItemsTheSame(
                     oldItem: Person,
                     newItem: Person
-            ) = oldItem.id == newItem.id
+            ) = oldItem.name == newItem.name
 
             override fun areContentsTheSame(
                     oldItem: Person,

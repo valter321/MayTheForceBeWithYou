@@ -15,7 +15,18 @@ import com.valter.maytheforcebewith_valterfrancisco.ui.components.ForceDataSourc
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
 import com.valter.maytheforcebewith_valterfrancisco.utils.launchSafely
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+private const val QUERY_DEBOUNCE = 500L
+
+@FlowPreview
+@ExperimentalCoroutinesApi
 class MainViewModel(
         private val repository: SwapiRepository
 ) : ViewModel() {
@@ -24,12 +35,21 @@ class MainViewModel(
         ForceDataSource(this::loadInitialPage, this::loadPage)
     }
 
+    val queryChannel = ConflatedBroadcastChannel<String>()
+
     private var _peopleData = MutableLiveData<Outcome<PeopleData>>()
     internal var peopleData: LiveData<Outcome<PeopleData>> = _peopleData
     internal var people = forceDataSourceFactory.toLiveData(1)
 
     private var _favoriteResponse = MutableLiveData<Outcome<ForceResponse>>()
     var favoriteResponse: LiveData<Outcome<ForceResponse>> = _favoriteResponse
+
+    init {
+        queryChannel.asFlow()
+                .debounce(QUERY_DEBOUNCE)
+                .onEach { retry() }
+                .launchIn(viewModelScope)
+    }
 
     /**
      * Proxy to ForceDataSource
@@ -64,7 +84,7 @@ class MainViewModel(
                 loading = isFirstPage,
                 context = Dispatchers.IO
         ) {
-            repository.getPeople(pageToLoad, isFirstPage).also {
+            repository.getPeople(queryChannel.valueOrNull.orEmpty(), pageToLoad, isFirstPage).also {
                 dataSourceCallbackCaller(it)
             }
         }
