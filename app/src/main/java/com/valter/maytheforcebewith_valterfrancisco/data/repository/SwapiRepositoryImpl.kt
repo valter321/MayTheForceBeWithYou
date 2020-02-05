@@ -2,50 +2,59 @@ package com.valter.maytheforcebewith_valterfrancisco.data.repository
 
 import android.content.Context
 import com.valter.maytheforcebewith_valterfrancisco.data.db.PersonDao
-import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
+import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
 import com.valter.maytheforcebewith_valterfrancisco.utils.isConnectedToNetwork
 
 class SwapiRepositoryImpl(
         private val peopleDao: PersonDao,
         private val swapiService: SwapiService,
-        private val context: Context
+        context: Context
 ) : SwapiRepository {
 
-    override suspend fun getPeople(searchQuery: String?, page: String, isFirstPage: Boolean): PeopleData {
+    private val appContext = context.applicationContext
 
-        if(context.applicationContext.isConnectedToNetwork()) {
-            if(searchQuery.isNullOrEmpty()) {
-                val peopleData = if (isFirstPage) {
-                    fetchPeople()
-                } else {
-                    fetchNextPeople(page)
-                }
-
-                val peopleList = peopleData.results.also {
-                    persistData(it)
-                }
-
-                return PeopleData(
-                        peopleList,
-                        peopleData.next
-                )
-            } else {
-                val searchList = peopleDao.getPerson("$searchQuery%")
-                return PeopleData(
-                        searchList,
-                        null
-                )
-            }
+    override suspend fun getPeople(searchQuery: String?, page: String, isFirstPage: Boolean) = if (appContext.isConnectedToNetwork()) {
+        if (searchQuery.isNullOrEmpty()) {
+            fetchPeopleInfoFromNetwork(page, isFirstPage)
         } else {
-            return PeopleData(
-                    peopleDao.getAllPeople(),
-                    null
-            )
+            filterPeople(searchQuery)
         }
+    } else {
+        fetchPeopleInfoFromDatabase()
     }
+
+    private suspend fun fetchPeopleInfoFromNetwork(page: String, isFirstPage: Boolean): PeopleData {
+        val peopleData = if (isFirstPage) {
+            fetchPeople()
+        } else {
+            fetchNextPeople(page)
+        }
+
+        val peopleList = peopleData.results.also {
+            persistData(it)
+        }
+
+        return PeopleData(
+                peopleList,
+                peopleData.next
+        )
+    }
+
+    private suspend fun filterPeople(searchQuery: String): PeopleData {
+        val searchList = peopleDao.getPerson("$searchQuery%")
+        return PeopleData(
+                searchList,
+                null
+        )
+    }
+
+    private suspend fun fetchPeopleInfoFromDatabase() = PeopleData(
+            peopleDao.getAllPeople(),
+            null
+    )
 
     private suspend fun fetchPeople() = swapiService.getPeople()
 
@@ -55,7 +64,7 @@ class SwapiRepositoryImpl(
         peopleDao.insert(people)
     }
 
-    override suspend fun favoritePerson(person: Person) : ForceResponse {
+    override suspend fun favoritePerson(person: Person): ForceResponse {
         return swapiService.sendFavoritePerson(person)
     }
 }
