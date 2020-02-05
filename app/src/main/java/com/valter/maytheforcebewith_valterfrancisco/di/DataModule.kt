@@ -7,6 +7,8 @@ import androidx.room.Room
 import com.squareup.moshi.Moshi
 import com.valter.maytheforcebewith_valterfrancisco.BuildConfig
 import com.valter.maytheforcebewith_valterfrancisco.data.db.SwapiDatabase
+import com.valter.maytheforcebewith_valterfrancisco.data.dispatchers.AppDispatchersContainer
+import com.valter.maytheforcebewith_valterfrancisco.data.dispatchers.DispatchersContainer
 import com.valter.maytheforcebewith_valterfrancisco.data.network.ConnectivityInterceptor
 import com.valter.maytheforcebewith_valterfrancisco.data.network.ConnectivityInterceptorImpl
 import com.valter.maytheforcebewith_valterfrancisco.data.network.SwapiService
@@ -15,6 +17,9 @@ import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiReposit
 import com.valter.maytheforcebewith_valterfrancisco.ui.list.MainViewModel
 import com.valter.maytheforcebewith_valterfrancisco.ui.list.PersonListNavigation
 import com.valter.maytheforcebewith_valterfrancisco.ui.list.PersonListNavigationImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -23,6 +28,8 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 object DataModule {
     val module = module {
         single { provideMoshi() }
@@ -33,8 +40,9 @@ object DataModule {
         single { provideDatabase(androidApplication()) }
         single { providePersonDao(get()) }
         single { provideSwapiService(get()) }
+        single<DispatchersContainer> { AppDispatchersContainer() }
         single<SwapiRepository> { SwapiRepositoryImpl(get(), get(), get()) }
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get()) }
         factory<PersonListNavigation> { (fragment: Fragment) -> PersonListNavigationImpl(fragment.findNavController()) }
     }
 }

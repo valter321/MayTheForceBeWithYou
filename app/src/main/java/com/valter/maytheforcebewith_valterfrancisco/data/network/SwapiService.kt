@@ -10,9 +10,7 @@ const val WEB_HOOK_ID = "fcb153e0-804e-4896-b8cc-cb51b2ec4ce7"
 interface SwapiService {
 
     @GET("people")
-    suspend fun getPeople(
-            @Query("page") page: String = ""
-    ) : SwapiResponse<Person>
+    suspend fun getPeople() : SwapiResponse<Person>
 
     @GET
     suspend fun getNextPeople(@Url url: String) : SwapiResponse<Person>

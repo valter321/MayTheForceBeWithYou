@@ -9,11 +9,13 @@ import androidx.paging.toLiveData
 import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
 import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
+import com.valter.maytheforcebewith_valterfrancisco.data.dispatchers.DispatchersContainer
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.ForceDataSource
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.ForceDataSourceFactory
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
 import com.valter.maytheforcebewith_valterfrancisco.utils.launchSafely
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -28,7 +30,8 @@ private const val QUERY_DEBOUNCE = 500L
 @FlowPreview
 @ExperimentalCoroutinesApi
 class MainViewModel(
-        private val repository: SwapiRepository
+        private val repository: SwapiRepository,
+        private val dispatchersContainer: DispatchersContainer
 ) : ViewModel() {
 
     private val forceDataSourceFactory = ForceDataSourceFactory {
@@ -82,7 +85,7 @@ class MainViewModel(
         viewModelScope.launchSafely(
                 _peopleData,
                 loading = isFirstPage,
-                context = Dispatchers.IO
+                context = dispatchersContainer.IO
         ) {
             repository.getPeople(queryChannel.valueOrNull.orEmpty(), pageToLoad, isFirstPage).also {
                 dataSourceCallbackCaller(it)
@@ -94,7 +97,7 @@ class MainViewModel(
         viewModelScope.launchSafely(
                 _favoriteResponse,
                 loading = false,
-                context = Dispatchers.IO
+                context = dispatchersContainer.IO
         ) {
             repository.favoritePerson(person)
         }
