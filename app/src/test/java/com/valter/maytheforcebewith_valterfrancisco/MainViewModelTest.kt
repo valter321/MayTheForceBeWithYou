@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.data.dispatchers.TestDispatcherContainer
 import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
-import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleLoadData
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
 import com.valter.maytheforcebewith_valterfrancisco.ui.list.MainViewModel
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
@@ -40,7 +40,7 @@ class VerticalViewModelTest {
     fun `Loading a page, should broadcast the loaded people on the LiveData`() {
         val peopleList = (1..10).map { mockk<Person>(relaxed = true) }
 
-        val mockedPeopleData = PeopleData(peopleList, null)
+        val mockedPeopleData = PeopleLoadData(peopleList, null)
 
         val repository: SwapiRepository = mockk {
             coEvery { getPeople(any(), any(), any()) } returns mockedPeopleData
@@ -64,8 +64,8 @@ class VerticalViewModelTest {
         val pageList2 = listOf(mockk<Person>(relaxed = true))
 
         val repository: SwapiRepository = mockk {
-            coEvery { getPeople(any(), any(), any()) } returns PeopleData(pageList1, "nextPage")
-            coEvery { getPeople(any(),"nextPage", any()) } returns PeopleData(pageList2, null)
+            coEvery { getPeople(any(), any(), any()) } returns PeopleLoadData(pageList1, "nextPage")
+            coEvery { getPeople(any(),"nextPage", any()) } returns PeopleLoadData(pageList2, null)
         }
 
         val viewModel = MainViewModel(repository, TestDispatcherContainer)

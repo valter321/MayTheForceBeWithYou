@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.toLiveData
 import com.valter.maytheforcebewith_valterfrancisco.data.model.ForceResponse
-import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleData
+import com.valter.maytheforcebewith_valterfrancisco.data.model.PeopleLoadData
 import com.valter.maytheforcebewith_valterfrancisco.data.db.entity.Person
 import com.valter.maytheforcebewith_valterfrancisco.data.dispatchers.DispatchersContainer
 import com.valter.maytheforcebewith_valterfrancisco.data.repository.SwapiRepository
@@ -15,8 +15,6 @@ import com.valter.maytheforcebewith_valterfrancisco.ui.components.ForceDataSourc
 import com.valter.maytheforcebewith_valterfrancisco.ui.components.ForceDataSourceFactory
 import com.valter.maytheforcebewith_valterfrancisco.utils.Outcome
 import com.valter.maytheforcebewith_valterfrancisco.utils.launchSafely
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -40,8 +38,8 @@ class MainViewModel(
 
     val queryChannel = ConflatedBroadcastChannel<String>()
 
-    private var _peopleData = MutableLiveData<Outcome<PeopleData>>()
-    internal var peopleData: LiveData<Outcome<PeopleData>> = _peopleData
+    private var _peopleData = MutableLiveData<Outcome<PeopleLoadData>>()
+    internal var peopleData: LiveData<Outcome<PeopleLoadData>> = _peopleData
     internal var people = forceDataSourceFactory.toLiveData(1)
 
     private var _favoriteResponse = MutableLiveData<Outcome<ForceResponse>>()
@@ -80,7 +78,7 @@ class MainViewModel(
     private fun launchLoadRequest(
             pageToLoad: String = "",
             isFirstPage: Boolean = false,
-            dataSourceCallbackCaller: (PeopleData) -> Unit
+            dataSourceCallbackCaller: (PeopleLoadData) -> Unit
     ) {
         viewModelScope.launchSafely(
                 _peopleData,
